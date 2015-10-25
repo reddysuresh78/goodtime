@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">GoodTime</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="loading">Loading...</string>
+    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
+    <string name="address">address</string>
+    <string name="fordate">For Date</string>
+    <string name="sunrise">Sun Rise</string>
+    <string name="sunset">Sun Set</string>
+
+    <string-array name="stars_array">
+        <item>ASWINI</item>
+        <item>BHARANI</item>
+        <item>KRITIKA</item>
+        <item>ROHINI</item>
+        <item>MRIGASIRA</item>
+        <item>ARUDRA</item>
+        <item>PUNARVASU</item>
+        <item>PUSHYAMI</item>
+        <item>ASLESHA</item>
+        <item>MAKHA</item>
+        <item>PUBBA</item>
+        <item>UTTARA</item>
+        <item>HASTHA</item>
+        <item>CHITTA</item>
+        <item>SWATHI</item>
+        <item>VISAKHA</item>
+        <item>ANURADHA</item>
+        <item>JYESTA</item>
+        <item>MOOLA</item>
+        <item>PURVASHADA</item>
+        <item>UTTARASHADA</item>
+        <item>SRAVANAM</item>
+        <item>DHANISTA</item>
+        <item>SATABHISHAM</item>
+        <item>PURVABHADRA</item>
+        <item>UTTARABHADRA</item>
+        <item>REVATHI</item>
+    </string-array>
+
+</resources>

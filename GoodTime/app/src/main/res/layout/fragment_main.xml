@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivityFragment"
+    android:orientation="vertical">
+
+    <TextView android:text="@string/fordate" android:layout_width="wrap_content"
+      android:id="@+id/fordate"  android:layout_height="wrap_content" />
+
+    <TextView android:text="@string/longitude" android:layout_width="wrap_content"
+        android:id="@+id/longitude"  android:layout_height="wrap_content" />
+
+    <TextView android:text="@string/latitude" android:layout_width="wrap_content"
+        android:id="@+id/latitude"  android:layout_height="wrap_content" />
+
+    <TextView android:text="@string/sunrise" android:layout_width="wrap_content"
+        android:id="@+id/sunrise"  android:layout_height="wrap_content" />
+
+    <TextView android:text="@string/sunset" android:layout_width="wrap_content"
+        android:id="@+id/sunset"  android:layout_height="wrap_content" />
+
+    <TextView android:text="@string/address" android:layout_width="wrap_content"
+        android:id="@+id/address"  android:layout_height="wrap_content" />
+
+</LinearLayout>
