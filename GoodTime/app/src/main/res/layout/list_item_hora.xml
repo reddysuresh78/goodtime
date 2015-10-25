@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivityFragment"
+    android:orientation="horizontal">
+
+
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="16dp"
+    android:id="@+id/list_item_hora_planet_textview"
+     android:minHeight="?android:attr/listPreferredItemHeight"
+    android:textColor="@color/wallet_holo_blue_light"
+    android:layout_weight="2"
+    android:layout_gravity="left"
+    />
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent" android:layout_height="16dp"
+android:id="@+id/list_item_hora_startTime_textview" android:minHeight="?android:attr/listPreferredItemHeight"
+    android:textColor="@color/wallet_holo_blue_light"
+    android:layout_weight="1"
+    android:layout_gravity="left"/>
+
+    </LinearLayout>

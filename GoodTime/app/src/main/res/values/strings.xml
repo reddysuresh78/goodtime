@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GoodTime</string>
+    <string name="app_name">Good Time</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
@@ -10,6 +10,39 @@
     <string name="fordate">For Date</string>
     <string name="sunrise">Sun Rise</string>
     <string name="sunset">Sun Set</string>
+    <string name="good">Good</string>
+    <string name="bad">Bad</string>
+    <string name="currentStatusText">Current Status</string>
+
+    <string name="allGood">Your Star and Current Hora will support!</string>
+    <string name="starGood">Your Star is Good but Hora will not support!</string>
+    <string name="horaGood">Your Star is not Good but Hora will support!</string>
+    <string name="noneGood">Neither Your Star nor Current Hora will support!</string>
+
+    <string name="goodStatusText">Go ahead and do it!</string>
+    <string name="badStatusText">Please hold on for now!</string>
+    <string name="currentStar">Current Star</string>
+    <string name="currentStarLabel">Current Star:</string>
+    <string name="currentHoraLabel">Current Hora:</string>
+    <string name="currentHora">Current Hora</string>
+    <string name="your_star_label">Your Star</string>
+    <string name="your_star_key">YOUR_STAR</string>
+    <string name="your_star_default">ASWINI</string>
+    <string name="title_activity_settings">Star Settings</string>
+    <string name="yourStarLabel">Your Star: </string>
+    <string name="yourStar">Your Star</string>
+    <string name="reasonLabel">Reason:</string>
+    <string name="reasonText">Reason</string>
+
+    <string-array name="planets_array">
+        <item>SUN</item>
+        <item>VENUS</item>
+        <item>MERCURY</item>
+        <item>MOON</item>
+        <item>SATURN</item>
+        <item>JUPITER</item>
+        <item>MARS</item>
+    </string-array>
 
     <string-array name="stars_array">
         <item>ASWINI</item>

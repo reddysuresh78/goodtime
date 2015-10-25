@@ -1,5 +1,6 @@
 package core;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
@@ -10,6 +11,8 @@ public class HoraRange {
     private int planet;
     private Calendar startTime;
     private Calendar endTime;
+
+    private static SimpleDateFormat WEEK_DAY_FORMAT = new SimpleDateFormat("EE hh:mm:ss a");
 
     public HoraRange(int planet, Calendar startTime, Calendar endTime) {
         this.planet = planet;
@@ -39,6 +42,10 @@ public class HoraRange {
 
     public void setEndTime(Calendar endTime) {
         this.endTime = endTime;
+    }
+
+    public String getDisplayString(){
+        return WEEK_DAY_FORMAT.format(startTime.getTime()) + " - " + WEEK_DAY_FORMAT.format(endTime.getTime());
     }
 
     @Override

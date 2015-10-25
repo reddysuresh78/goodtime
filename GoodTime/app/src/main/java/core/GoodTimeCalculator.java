@@ -171,20 +171,20 @@ public class GoodTimeCalculator {
         Calendar sunRiseTimeLocal = Calendar.getInstance();
         sunRiseTimeLocal.setTime(sunRiseTime.getTime());
 
-        Calendar[] horas = new Calendar[24];
-        for(int i=0;i<24;i++){
+        Calendar[] horas = new Calendar[25];
+        for(int i=0;i<25;i++){
             Calendar c = Calendar.getInstance();
             c.setTime(sunRiseTimeLocal.getTime());
             horas[i] = c;
             sunRiseTimeLocal.setTime(new Date(sunRiseTimeLocal.getTime().getTime()  + diff));
          }
-        horas[23] = sunRiseTimeLocal;
+//        horas[24] = sunRiseTimeLocal;
 
         int curDay = sunRiseTime.get(Calendar.DAY_OF_WEEK);
 
         List<HoraRange> horaRanges = new ArrayList<HoraRange>();
-        for(int i=0; i<horas.length;i++){
-            horaRanges.add(new HoraRange(curDay+i, horas[i], i+1 == horas.length ? null: horas[i+1]));
+        for(int i=0; i<horas.length-1;i++){
+            horaRanges.add(new HoraRange((curDay+i-1)%7, horas[i], horas[i+1]));
         }
 
         return horaRanges;

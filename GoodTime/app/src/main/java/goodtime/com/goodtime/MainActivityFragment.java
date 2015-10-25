@@ -1,14 +1,18 @@
 package goodtime.com.goodtime;
 
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -25,9 +29,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import core.GoodTimeCalculator;
+import core.HoraRange;
 import core.InfoHolder;
+import core.Utils;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -39,15 +47,34 @@ public class MainActivityFragment extends Fragment implements
 
     private GoogleApiClient mGoogleApiClient;
 
+    private HoraAdapter  mHoraAdapter;
+
     private Location mLastLocation;
     private TextView mLatitudeText;
     private TextView mLongitudeText;
+
+
+    private TextView mReasonText;
+
+    private TextView mYourStarText;
 
     private TextView mForDate;
     private TextView mSunriseText;
     private TextView mSunsetText;
 
+    private TextView mCurrentStar;
+
+    private TextView mCurrentStatusText;
+
+    private ImageView mCurrentStatus;
+
+    private TextView mCurrentHora;
+
     private TextView mAdress;
+
+    private String[] mStarsArray;
+
+    private String[] mPlanetsArray;
 
     public MainActivityFragment() {
 
@@ -58,13 +85,54 @@ public class MainActivityFragment extends Fragment implements
                              Bundle savedInstanceState) {
         View rootView =  inflater.inflate(R.layout.fragment_main, container, false);
 
-        mForDate = (TextView) rootView.findViewById(R.id.fordate);
-        mLatitudeText = (TextView) rootView.findViewById(R.id.latitude);
-        mLongitudeText= (TextView) rootView.findViewById(R.id.longitude);
-        mAdress= (TextView) rootView.findViewById(R.id.address);
+        // The ArrayAdapter will take data from a source and
+        // use it to populate the ListView it's attached to.
+//        mHoraAdapter =
+//                new ArrayAdapter<String>(
+//                        getActivity(), // The current context (this activity)
+//                        R.layout.list_item_hora, // The name of the layout ID.
+//                        R.id.list_item_hora_textview, // The ID of the textview to populate.
+//                        new ArrayList<String>());
+        List<HoraRange> horaList = new ArrayList<>();
 
-        mSunriseText  = (TextView) rootView.findViewById(R.id.sunrise);
-        mSunsetText  = (TextView) rootView.findViewById(R.id.sunset);
+        mHoraAdapter = new HoraAdapter(getActivity().getApplicationContext(), horaList);
+        // Get a reference to the ListView, and attach this adapter to it.
+        ListView listView = (ListView) rootView.findViewById(R.id.listview_horas);
+        listView.setAdapter(mHoraAdapter);
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+//                String forecast = mHoraAdapter.getItem(position);
+//                Intent intent = new Intent(getActivity(), DetailActivity.class)
+//                        .putExtra(Intent.EXTRA_TEXT, forecast);
+//                startActivity(intent);
+//            }
+//        });
+
+//        mForDate = (TextView) rootView.findViewById(R.id.fordate);
+//        mLatitudeText = (TextView) rootView.findViewById(R.id.latitude);
+//        mLongitudeText= (TextView) rootView.findViewById(R.id.longitude);
+//        mAdress= (TextView) rootView.findViewById(R.id.address);
+//
+//        mSunriseText  = (TextView) rootView.findViewById(R.id.sunrise);
+//        mSunsetText  = (TextView) rootView.findViewById(R.id.sunset);
+
+        mCurrentStatus  = (ImageView) rootView.findViewById(R.id.currentStatus);
+
+        mCurrentStatusText = (TextView) rootView.findViewById(R.id.currentStatusText);
+
+        mCurrentStar = (TextView) rootView.findViewById(R.id.currentStar);
+
+        mCurrentHora = (TextView) rootView.findViewById(R.id.currentHora);
+
+        mStarsArray = getResources().getStringArray(R.array.stars_array);
+
+        mPlanetsArray = getResources().getStringArray(R.array.planets_array);
+
+        mYourStarText = (TextView) rootView.findViewById(R.id.yourStarTextView);
+        mReasonText= (TextView) rootView.findViewById(R.id.reasonText);
+
 //        FetchSunInfoTask weatherTask = new FetchSunInfoTask();
 //        weatherTask.execute("dd");
 
@@ -79,15 +147,67 @@ public class MainActivityFragment extends Fragment implements
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
         if (mLastLocation != null) {
-            mLatitudeText.setText(getResources().getString(R.string.longitude) + " : " +  String.valueOf(mLastLocation.getLongitude()));
-            mLongitudeText.setText(getResources().getString(R.string.latitude)+ " : " +  String.valueOf(mLastLocation.getLatitude()));
+//            mLatitudeText.setText(getResources().getString(R.string.longitude) + " : " +  String.valueOf(mLastLocation.getLongitude()));
+//            mLongitudeText.setText(getResources().getString(R.string.latitude)+ " : " +  String.valueOf(mLastLocation.getLatitude()));
 
             InfoHolder info = GoodTimeCalculator.calculateMoon(mLastLocation.getLongitude(), mLastLocation.getLatitude(), 0);
 
-            mSunriseText.setText(getResources().getString(R.string.sunrise) + " : " +  String.valueOf(info.getSunriseTime().getTime()));
-            mSunsetText.setText(getResources().getString(R.string.sunset) + " : " +  String.valueOf(info.getSunsetTime().getTime()));
+//                   mSunriseText.setText(getResources().getString(R.string.sunrise) + " : " +  String.valueOf(info.getSunriseTime().getTime()));
+//            mSunsetText.setText(getResources().getString(R.string.sunset) + " : " + String.valueOf(info.getSunsetTime().getTime()));
+//
+//            mForDate.setText(getResources().getString(R.string.fordate) + " : " + Calendar.getInstance().getTime());
+            int curStarIndex =  Utils.getCurrentStar(info);
 
-            mAdress.setText(info.toString());
+            mCurrentStar.setText(mStarsArray[curStarIndex]);
+
+            SharedPreferences sharedPrefs =
+                    PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String yourStar = sharedPrefs.getString(
+                    getString(R.string.your_star_key),
+                    getString(R.string.your_star_default));
+
+            mYourStarText.setText(yourStar);
+
+            boolean isGoodStar = Utils.isGoodStar(mStarsArray, curStarIndex, yourStar );
+
+            boolean isGoodTime  = Utils.isGoodTime(info);
+            if( isGoodTime && isGoodStar) {
+
+                mCurrentStatus.setImageResource(R.drawable.happy_smiley);
+                mCurrentStatusText.setText(getResources().getString(R.string.goodStatusText));
+                mReasonText.setText(getResources().getString(R.string.allGood));
+            }else{
+
+                mCurrentStatus.setImageResource(R.drawable.sad_smiley);
+                mCurrentStatusText.setText(getResources().getString(R.string.badStatusText));
+
+                if(isGoodTime && !isGoodStar){
+                    mReasonText.setText(getResources().getString(R.string.horaGood));
+                }else if(!isGoodTime && isGoodStar){
+                    mReasonText.setText(getResources().getString(R.string.starGood));
+                }else{
+                    mReasonText.setText(getResources().getString(R.string.noneGood));
+                }
+
+
+            }
+            mHoraAdapter.setValues(info.getHoras());
+
+            int curHoraIndex =  Utils.getCurrentHora(info);
+
+            String currentHoraPlanet = mPlanetsArray[info.getHoras().get(curHoraIndex).getPlanet()];
+
+            mCurrentHora.setText(currentHoraPlanet);
+
+
+
+//            for(HoraRange horaRange : info.getHoras()) {
+//                mHoraAdapter.add( horaRange );
+//            }
+
+
+
+//            mAdress.setText(info.toString());
 //            Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
 //            String result = null;
 //            try {

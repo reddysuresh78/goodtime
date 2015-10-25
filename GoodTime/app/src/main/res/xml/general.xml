@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:title="@string/your_star_label"
+        android:key="@string/your_star_key"
+        android:defaultValue="@string/your_star_default"
+        android:entryValues="@array/stars_array"
+        android:entries="@array/stars_array" />
+
+</PreferenceScreen>
