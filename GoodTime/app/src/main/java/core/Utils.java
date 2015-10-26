@@ -10,12 +10,18 @@ public class Utils {
     private static String GOOD_PLANETS = "0,1,2,3,5";
     private static String BAD_PLANETS = "4,6";
 
+    private static int[] RULING_PLANET_INDEX = {1,4,7,3,6,2,5};
+
     public static boolean isGoodPlanet(int planet){
 
         if(GOOD_PLANETS.contains(Integer.toString(planet))){
             return true;
         }
         return false;
+    }
+
+    public static int getRulingPlanetIndexForDay(int day){
+        return RULING_PLANET_INDEX[day];
     }
 
     public static boolean isGoodTime(InfoHolder infoHolder){
@@ -37,6 +43,8 @@ public class Utils {
         Calendar cal = Calendar.getInstance();
 
         StarRange curRange = infoHolder.getFirstStar();
+
+
 
         if( (curRange.getStartTime().before(cal) || curRange.getStartTime().equals(cal)) &&
                 (curRange.getEndTime().after(cal) || curRange.getEndTime().equals(cal))) {

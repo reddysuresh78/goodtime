@@ -144,6 +144,13 @@ public class MainActivityFragment extends Fragment implements
     //for onconnected to work, we should have google map open at least once.
     @Override
     public void onConnected(Bundle connectionHint) {
+
+        refreshView();
+
+    }
+
+    private void refreshView() {
+
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
         if (mLastLocation != null) {
@@ -237,6 +244,11 @@ public class MainActivityFragment extends Fragment implements
         Log.e("from fragment","test");
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshView();
+    }
 
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())

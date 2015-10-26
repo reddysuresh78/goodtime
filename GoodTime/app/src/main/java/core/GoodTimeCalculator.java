@@ -15,6 +15,7 @@ import swisseph.TransitCalculator;
 
 public class GoodTimeCalculator {
 
+
     public static InfoHolder calculateMoon(double longitude, double latitude, int numDays){
 
         InfoHolder info = new InfoHolder();
@@ -121,6 +122,19 @@ public class GoodTimeCalculator {
 
         StarRange todayRange = new StarRange( nakshatra , toDate(nakshStart, offsetHrs),  toDate(nakshEnd, offsetHrs));
 
+        if(todayRange.getStartTime().get(Calendar.DAY_OF_MONTH)!=cal.get(Calendar.DAY_OF_MONTH) &&
+                todayRange.getEndTime().get(Calendar.DAY_OF_MONTH)!=cal.get(Calendar.DAY_OF_MONTH)
+                ) {
+
+            nakshatra--;
+
+            nakshStart = getNextNakshatraStart(sw, sd.getJulDay(), nakshatra, longitude, latitude);
+            nakshEnd = getNextNakshatraEnd(sw, sd.getJulDay(), nakshatra, longitude, latitude);
+
+            todayRange = new StarRange( nakshatra , toDate(nakshStart, offsetHrs),  toDate(nakshEnd, offsetHrs));
+        }
+
+
 //        System.out.println("\ntodayRange" + todayRange);
 
         nakshStart = getNextNakshatraStart(sw, sd.getJulDay(), (nakshatra +1)%27  , longitude, latitude);
@@ -182,6 +196,7 @@ public class GoodTimeCalculator {
 
         int curDay = sunRiseTime.get(Calendar.DAY_OF_WEEK);
 
+        curDay = Utils.getRulingPlanetIndexForDay(curDay-1);
         List<HoraRange> horaRanges = new ArrayList<HoraRange>();
         for(int i=0; i<horas.length-1;i++){
             horaRanges.add(new HoraRange((curDay+i-1)%7, horas[i], horas[i+1]));
