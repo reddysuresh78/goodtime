@@ -12,5 +12,6 @@
     <color name="primary_dark">#0288D1</color>  <!-- 700 -->
     <color name="primary_light">#B3E5FC</color> <!-- 100 -->
     <color name="accent">#FFD740</color>
-
+    <color name="white_opaque">#FFFFFFFF</color>
+    <color name="pitch_black">#FF000000</color>
 </resources>

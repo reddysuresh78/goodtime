@@ -34,6 +34,10 @@
     <string name="reasonLabel">Reason:</string>
     <string name="reasonText">Reason</string>
 
+    <string name="dayChart">Chart for 6 AM to 6 PM</string>
+
+    <string name="nightChart">Chart for 6 PM to 6 AM(Tomorrow)</string>
+
     <string-array name="planets_array">
         <item>SUN</item>
         <item>VENUS</item>

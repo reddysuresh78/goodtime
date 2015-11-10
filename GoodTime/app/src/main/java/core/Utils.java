@@ -80,11 +80,42 @@ public class Utils {
                 break;
             }
         }
-        int diff = (Math.abs(nativeStarIndex - curStarIndex) + 1)  % 9;
+
+        int diff = 0;
+
+        if(nativeStarIndex <= curStarIndex) {
+            diff = ( curStarIndex -  nativeStarIndex + 1) %9;
+        }else{
+            diff = ( (27 -nativeStarIndex) +  curStarIndex + 1) %9;
+        }
 
         if(diff == 2 || diff == 4 || diff == 6 || diff == 8 || diff ==0) {
             return true;
         }
         return false;
      }
+
+    public static int getStartingAngle(Calendar sunTime) {
+
+        int hours = sunTime.get(Calendar.HOUR) - 3;
+        int minute = sunTime.get(Calendar.MINUTE);
+
+        if(hours < 0)
+            hours+=12;
+
+        return hours*30 + (minute/2);
+
+    }
+
+    public static String[] getLabels(InfoHolder info) {
+
+        String[] labels = new String[12];
+
+        for(int i=0; i< 12; i++) {
+            labels[i] =  info.getHoras().get(i).getDisplayString();
+        }
+
+        return labels;
+
+    }
 }

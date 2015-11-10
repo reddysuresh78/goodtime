@@ -97,6 +97,10 @@ public class GoodTimeCalculator {
 
         info.setHoras(calcHoras(info.getSunriseTime(), info.getSunsetTime()));
 
+        long diff = Math.round((info.getSunsetTime().getTime().getTime() - info.getSunriseTime().getTime().getTime()) / (12));
+
+        info.setHoraTime(Math.round(diff/(1000*60)));
+
 //        System.out.print("\nsunset time" + toDate(returnedTime.val, offsetHrs).getTime());
 
         int nakshatra = ((int) Math.floor(moonLong / 13.333333333333334D));
@@ -181,6 +185,8 @@ public class GoodTimeCalculator {
     private static List<HoraRange> calcHoras(Calendar sunRiseTime, Calendar sunSetTime)  {
 
         long diff = Math.round((sunSetTime.getTime().getTime() - sunRiseTime.getTime().getTime()) / (12));
+
+
 
         Calendar sunRiseTimeLocal = Calendar.getInstance();
         sunRiseTimeLocal.setTime(sunRiseTime.getTime());

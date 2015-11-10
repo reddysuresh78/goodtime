@@ -16,9 +16,19 @@ public class InfoHolder {
     private Calendar sunriseTime;
     private Calendar sunsetTime;
 
+    private int horaTime;
+
     private int thidhi;
 
     List<HoraRange> horas = new ArrayList<HoraRange>(24);
+
+    public int getHoraTime() {
+        return horaTime;
+    }
+
+    public void setHoraTime(int horaTime) {
+        this.horaTime = horaTime;
+    }
 
     public int getThidhi() {
         return thidhi;

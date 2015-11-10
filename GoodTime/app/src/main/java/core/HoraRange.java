@@ -12,7 +12,9 @@ public class HoraRange {
     private Calendar startTime;
     private Calendar endTime;
 
-    private static SimpleDateFormat WEEK_DAY_FORMAT = new SimpleDateFormat("EE hh:mm:ss a");
+    //new SimpleDateFormat("EE hh:mm:ss a");
+
+    private static SimpleDateFormat WEEK_DAY_FORMAT = new SimpleDateFormat("hh:mm a");
 
     public HoraRange(int planet, Calendar startTime, Calendar endTime) {
         this.planet = planet;
